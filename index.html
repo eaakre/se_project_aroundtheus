@@ -6,9 +6,132 @@
     <link rel="stylesheet" href="pages/index.css" />
     <title>Around the US</title>
   </head>
-  <body>
+  <body class="body">
     <div class="page">
-      <h3 class="page__content">Testing</h3>
+      <header class="header page__header">
+        <img
+          src="images/logo.svg"
+          alt="Around the US logo"
+          class="header__logo"
+        />
+      </header>
+      <main class="content">
+        <section class="profile">
+          <img
+            src="images/jacques-cousteau.jpg"
+            alt="jacques-cousteau avatar"
+            class="profile__avatar"
+          />
+          <div class="profile__info">
+            <h1 class="profile__name">Jacques Cousteau</h1>
+            <h2 class="profile__description">Explorer</h2>
+            <button class="profile__edit-button">
+              <img src="images/edit.svg" alt="Edit button" />
+            </button>
+          </div>
+          <button class="profile__add-button">
+            <img src="images/add.svg" alt="Add button" />
+          </button>
+        </section>
+        <section class="element">
+          <div class="element__cards">
+            <div class="card element__card">
+              <img
+                src="images/yosemite.jpg"
+                alt="Yosemite Valley"
+                class="card__image"
+              />
+              <div class="card__info">
+                <h2 class="card__title">Yosemite Valley</h2>
+                <img
+                  src="images/favorite.svg"
+                  alt="Favorite image selector"
+                  class="card__favorite"
+                />
+              </div>
+            </div>
+
+            <div class="card element__card">
+              <img
+                src="images/lake-louise.jpg"
+                alt="Lake Louise"
+                class="card__image"
+              />
+              <div class="card__info">
+                <h2 class="card__title">Lake Louise</h2>
+                <img
+                  src="images/favorite.svg"
+                  alt="Favorite image selector"
+                  class="card__favorite"
+                />
+              </div>
+            </div>
+
+            <div class="card element__card">
+              <img
+                src="images/bald-mountains.jpg"
+                alt="Bald Mountains"
+                class="card__image"
+              />
+              <div class="card__info">
+                <h2 class="card__title">Bald Mountains</h2>
+                <img
+                  src="images/favorite.svg"
+                  alt="Favorite image selector"
+                  class="card__favorite"
+                />
+              </div>
+            </div>
+
+            <div class="card element__card">
+              <img src="images/latemar.jpg" alt="Latemar" class="card__image" />
+              <div class="card__info">
+                <h2 class="card__title">Latemar</h2>
+                <img
+                  src="images/favorite.svg"
+                  alt="Favorite image selector"
+                  class="card__favorite"
+                />
+              </div>
+            </div>
+
+            <div class="card element__card">
+              <img
+                src="images/vanoise.jpg"
+                alt="Vanoise National Park"
+                class="card__image"
+              />
+              <div class="card__info">
+                <h2 class="card__title">Vanoise National Park</h2>
+                <img
+                  src="images/favorite.svg"
+                  alt="Favorite image selector"
+                  class="card__favorite"
+                />
+              </div>
+            </div>
+
+            <div class="card element__card">
+              <img
+                src="images/lago.jpg"
+                alt="Lago di Braies"
+                class="card__image"
+              />
+              <div class="card__info">
+                <h2 class="card__title">Lago di Braies</h2>
+                <img
+                  src="images/favorite.svg"
+                  alt="Favorite image selector"
+                  class="card__favorite"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer class="footer">
+        <h2 class="footer__title">© 2022 Around The U.S.</h2>
+      </footer>
     </div>
   </body>
 </html>
