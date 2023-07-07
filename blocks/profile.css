@@ -2,4 +2,51 @@
   display: flex;
   color: #fff;
   font-family: Inter, Arial, Helvetica, sans-serif;
+  height: 120px;
+}
+
+.profile__avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.profile__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.profile__description {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.profile__name {
+  margin: 0;
+  font-family: Inter;
+  font-size: 42px;
+  font-weight: 500;
+  line-height: 48px;
+}
+
+.profile__edit-button {
+  background-color: transparent;
+  border: none;
+  width: 24px;
+  height: 24px;
+}
+
+.profile__title {
+  margin: 0;
+  font-family: Inter;
+  font-size: 18px;
+}
+
+.profile__add-button {
+  background-color: transparent;
+  border: none;
 }

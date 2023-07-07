@@ -16,22 +16,66 @@
         />
       </header>
       <main class="content">
-        <section class="profile">
+        <section class="profile content__profile">
           <img
             src="images/jacques-cousteau.jpg"
             alt="jacques-cousteau avatar"
             class="profile__avatar"
           />
           <div class="profile__info">
-            <h1 class="profile__name">Jacques Cousteau</h1>
-            <h2 class="profile__description">Explorer</h2>
-            <button class="profile__edit-button">
-              <img src="images/edit.svg" alt="Edit button" />
+            <div class="profile__description">
+              <h1 class="profile__name">
+                Jacques Cousteau
+                <span>
+                  <button class="profile__edit-button">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <rect
+                        x="0.5"
+                        y="0.5"
+                        width="23"
+                        height="23"
+                        stroke="white"
+                      />
+                      <path
+                        d="M17 8.32827L9.60377 15.7666L8.28302 14.4194L15.6604 7L17 8.32827ZM7 17L8.96226 16.4118L7.58491 15.0835L7 17Z"
+                        fill="white"
+                      />
+                    </svg>
+                  </button>
+                </span>
+              </h1>
+              <h2 class="profile__title">Explorer</h2>
+            </div>
+            <button class="profile__add-button">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="150"
+                height="50"
+                viewBox="0 0 150 50"
+                fill="none"
+              >
+                <rect
+                  x="1"
+                  y="1"
+                  width="148"
+                  height="48"
+                  rx="1"
+                  stroke="white"
+                  stroke-width="2"
+                />
+                <path
+                  d="M86 23.7778H76.2222V14H73.7778V23.7778H64V26.2222H73.7778V36H76.2222V26.2222H86V23.7778Z"
+                  fill="white"
+                />
+              </svg>
             </button>
           </div>
-          <button class="profile__add-button">
-            <img src="images/add.svg" alt="Add button" />
-          </button>
         </section>
         <section class="element">
           <div class="element__cards">
