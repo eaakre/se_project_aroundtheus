@@ -16,4 +16,4 @@ This project uses HTML5, CSS3, including flexbox and grid layouts to create a re
 
 **Github Pages**
 
-Here is the link to the Github Pages site:
+- [Link to live site on Gihub Pages](https://eaakre.github.io/se_project_aroundtheus/)
