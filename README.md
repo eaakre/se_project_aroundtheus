@@ -8,7 +8,7 @@
 
 **Intro**
 
-This project uses HTML5, CSS3, including flexbox and grid layouts to create a responsive layout.
+This project is a profile page for a traveller. It shows off the places they have been to. It uses HTML5, CSS3, including flexbox and grid layouts to create a responsive layout that displays correctly on all devices. The file structure is set up using BEM methodology.
 
 **Figma**
 
