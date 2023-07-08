@@ -1,12 +1,11 @@
-.footer {
+.footer__title {
+  padding: 0 0 40px;
+  color: #545454;
+  font-size: 18px;
 }
 
-.footer__title {
-  margin: 67px 0 60px;
-  color: #545454;
-  font-family: Inter;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+@media screen and (max-width: 637px) {
+  .footer__title {
+    font-size: 14px;
+  }
 }

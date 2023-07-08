@@ -1,10 +1,7 @@
-.content {
-}
-
 .content__profile {
-  margin-top: 40px;
+  padding-top: 40px;
 }
 
-.content__element {
-  margin-top: 50px;
+.content__cards {
+  display: flex;
 }
