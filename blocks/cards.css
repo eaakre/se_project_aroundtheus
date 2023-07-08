@@ -28,6 +28,7 @@
 .cards__description {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background-color: #fff;
   padding: 25px 15px 31px 21px;
   border-radius: 0 0 10px 10px;
@@ -45,10 +46,7 @@
 }
 
 .cards__favorite {
-  background-image: url(../images/favorite.svg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: transparent;
+  background: no-repeat transparent url(../images/favorite.svg);
   border: none;
   width: 21px;
   height: 18px;
@@ -59,8 +57,8 @@
   opacity: 0.5;
 }
 
-@media screen and (max-width: 568px) {
-  cards__list {
+@media screen and (max-width: 637px) {
+  .cards__list {
     padding: 15px 0 18px;
   }
 }
