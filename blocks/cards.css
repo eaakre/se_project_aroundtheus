@@ -1,6 +1,6 @@
 .cards {
   font-family: "Inter", Arial, sans-serif;
-  padding: 40px 0 40px;
+  padding: 40px 0 0;
 }
 
 .cards__list {
@@ -58,6 +58,10 @@
 }
 
 @media screen and (max-width: 637px) {
+  .cards {
+    padding: 40px 20px 0;
+  }
+
   .cards__list {
     padding: 15px 0 18px;
   }
