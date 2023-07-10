@@ -43,6 +43,7 @@
   font-size: 42px;
   font-weight: 500;
   line-height: 48px;
+  max-width: 400px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -71,6 +72,7 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
+  max-width: 373px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -90,9 +92,15 @@
   opacity: 0.6;
 }
 
-@media screen and (max-width: 770px) {
+@media screen and (max-width: 800px) {
   .profile__add-button {
     width: 30px;
+  }
+}
+
+@media screen and (max-width: 670px) {
+  .profile__name {
+    max-width: 350px;
   }
 }
 
@@ -121,6 +129,7 @@
     font-size: 22px;
     line-height: 26px;
     font-style: normal;
+    max-width: 254px;
   }
 
   .profile__edit-button {
@@ -134,6 +143,7 @@
     font-size: 14px;
     line-height: 18px;
     margin-top: 14px;
+    max-width: 282px;
   }
 
   .profile__add-button {
