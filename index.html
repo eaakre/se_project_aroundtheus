@@ -32,17 +32,17 @@
             />
           </div>
 
-          <div class="profile__info">
-            <div class="profile__description">
+          <div class="profile__info-container">
+            <div class="profile__info">
               <div class="profile__heading">
-                <h1 class="profile__name">Jacques Cousteau</h1>
+                <h1 class="profile__title">Jacques Cousteau</h1>
                 <button
                   class="profile__edit-button"
                   type="button"
                   aria-label="edit name"
                 ></button>
               </div>
-              <p class="profile__title">Explorer.</p>
+              <p class="profile__description">Explorer.</p>
             </div>
             <button
               class="profile__add-button"
@@ -155,6 +155,30 @@
       <footer class="footer">
         <p class="footer__text">© 2022 Around The U.S.</p>
       </footer>
+    </div>
+
+    <div class="modal modal_opened">
+      <div class="modal__container">
+        <button class="modal__close"></button>
+        <p class="modal__heading">Edit Profile</p>
+        <form class="form modal__form">
+          <input
+            type="text"
+            name="title"
+            class="form__input"
+            placeholder="Name"
+            value="Jacques Cousteau"
+          />
+          <input
+            type="text"
+            name="description"
+            class="form__input"
+            placeholder="Description"
+            value="Explorer."
+          />
+          <button class="modal__button">Save</button>
+        </form>
+      </div>
     </div>
 
     <script src="scripts/index.js"></script>

@@ -1,0 +1,12 @@
+.form {
+}
+.form__input {
+  color: #000;
+  font-family: "Inter" Arial, sans-serif;
+  padding: 14px 0;
+  font-size: 14px;
+  line-height: 18px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
