@@ -54,101 +54,19 @@
 
         <section class="cards content__cards">
           <ul class="cards__list">
-            <li class="cards__list-item">
-              <img
-                src="images/yosemite.jpg"
-                alt="Yosemite Valley"
-                class="cards__image"
-              />
-              <div class="cards__description">
-                <h2 class="cards__title">Yosemite Valley</h2>
-                <button
-                  class="cards__favorite"
-                  type="button"
-                  aria-label="favorite"
-                ></button>
-              </div>
-            </li>
-
-            <li class="cards__list-item">
-              <img
-                src="images/lake-louise.jpg"
-                alt="Lake Louise"
-                class="cards__image"
-              />
-              <div class="cards__description">
-                <h2 class="cards__title">Lake Louise</h2>
-                <button
-                  class="cards__favorite"
-                  type="button"
-                  aria-label="favorite"
-                ></button>
-              </div>
-            </li>
-
-            <li class="cards__list-item">
-              <img
-                src="images/bald-mountains.jpg"
-                alt="Bald Mountains"
-                class="cards__image"
-              />
-              <div class="cards__description">
-                <h2 class="cards__title">Bald Mountains</h2>
-                <button
-                  class="cards__favorite"
-                  type="button"
-                  aria-label="favorite"
-                ></button>
-              </div>
-            </li>
-
-            <li class="cards__list-item">
-              <img
-                src="images/latemar.jpg"
-                alt="Latemar"
-                class="cards__image"
-              />
-              <div class="cards__description">
-                <h2 class="cards__title">Latemar</h2>
-                <button
-                  class="cards__favorite"
-                  type="button"
-                  aria-label="favorite"
-                ></button>
-              </div>
-            </li>
-
-            <li class="cards__list-item">
-              <img
-                src="images/vanoise.jpg"
-                alt="Vanoise National Park"
-                class="cards__image"
-              />
-              <div class="cards__description">
-                <h2 class="cards__title">Vanoise National Park</h2>
-                <button
-                  class="cards__favorite"
-                  type="button"
-                  aria-label="favorite"
-                ></button>
-              </div>
-            </li>
-
-            <li class="cards__list-item">
-              <img
-                src="images/lago.jpg"
-                alt="Lago di Braies"
-                class="cards__image"
-              />
-              <div class="cards__description">
-                <h2 class="cards__title">Lago di Braies</h2>
-                <button
-                  class="cards__favorite"
-                  type="button"
-                  aria-label="favorite"
-                ></button>
-              </div>
-            </li>
+            <template id="cards__list-item">
+              <li class="cards__list-item">
+                <img src="" alt="" class="cards__image" />
+                <div class="cards__description">
+                  <h2 class="cards__title"></h2>
+                  <button
+                    class="cards__favorite"
+                    type="button"
+                    aria-label="favorite"
+                  ></button>
+                </div>
+              </li>
+            </template>
           </ul>
         </section>
       </main>
@@ -157,7 +75,7 @@
       </footer>
     </div>
 
-    <div class="modal">
+    <div class="modal" id="profile-edit-modal">
       <div class="modal__container">
         <button class="modal__close"></button>
         <p class="modal__heading">Edit Profile</p>
@@ -165,16 +83,14 @@
           <input
             type="text"
             name="title"
-            class="form__input"
+            class="form__input form__input_name"
             placeholder="Name"
-            value="Jacques Cousteau"
           />
           <input
             type="text"
             name="description"
-            class="form__input"
+            class="form__input form__input_description"
             placeholder="Description"
-            value="Explorer."
           />
           <button class="modal__button">Save</button>
         </form>
