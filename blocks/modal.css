@@ -78,9 +78,16 @@
 @media screen and (max-width: 637px) {
   .modal__container {
     max-width: 282px;
+    box-sizing: border-box;
   }
   .modal__close {
     bottom: calc(100% + 14px);
     left: calc(100% - 40px);
+    height: 26px;
+    width: 26px;
+  }
+  .modal__button {
+    font-size: 14px;
+    line-height: 18px;
   }
 }
