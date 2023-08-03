@@ -25,35 +25,83 @@ const initialCards = [
   },
 ];
 
+// Get template for initial card setup
+const cardTemplate = document.querySelector("#cards__list-item").content;
+
+// Wrappers
+const cardsList = document.querySelector(".cards__list");
+const profileEditModal = document.querySelector("#profile-edit-modal");
+const profileEditForm = profileEditModal.querySelector(".modal__form");
+const profileAddModal = document.querySelector("#profile-add-modal");
+const profileAddForm = profileAddModal.querySelector(".modal__form");
+
 // Find open and close buttons for edit profile button
 const profileEditButton = document.querySelector(".profile__edit-button");
-const profileEditModal = document.querySelector("#profile-edit-modal");
 const profileEditCloseButton = document.querySelector(".modal__close");
 const profileName = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
-
-// find the form fields in
-// Find modal form for editing profile in DOM
-const profileEditForm = profileEditModal.querySelector(".modal__form");
 const inputName = profileEditModal.querySelector(".form__input_name");
 const inputDescription = profileEditModal.querySelector(
   ".form__input_description"
 );
 
-function closePopup() {
-  profileEditModal.classList.remove("modal_opened");
+// Find open/close/form fields for add profile button
+const profileAddButton = document.querySelector(".profile__add-button");
+const profileAddCloseButton = profileAddModal.querySelector(".modal__close");
+const profileAddTitle = profileAddModal.querySelector(".form__input_title");
+const profileAddImage = profileAddModal.querySelector(".form__input_image");
+
+// Loop through cards to render on DOM
+function renderCard(cardData, wrapper) {
+  const cardElement = getCardElement(cardData);
+  wrapper.prepend(cardElement);
 }
 
+function getCardElement(data) {
+  const cardElement = cardTemplate.cloneNode(true);
+  const cardImage = cardElement.querySelector(".cards__image");
+  const cardTitle = cardElement.querySelector(".cards__title");
+  const likeButton = cardElement.querySelector(".cards__favorite");
+  const deleteButton = cardElement.querySelector(".cards__delete-button");
+
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("cards__favorite_active");
+  });
+
+  deleteButton.addEventListener("click", () => {
+    console.log(cardElement);
+    cardElement.remove();
+  });
+
+  cardImage.src = data.link;
+  cardImage.alt = data.name;
+  cardTitle.textContent = data.name;
+
+  return cardElement;
+}
+
+function openPopup(el) {
+  el.classList.add("modal_opened");
+}
+
+function closePopup(el) {
+  el.classList.remove("modal_opened");
+}
+
+initialCards.forEach((cardData) => {
+  renderCard(cardData, cardsList);
+});
+
 // open edit profile modal on click of edit button
-profileEditButton.addEventListener("click", function () {
-  profileEditModal.classList.add("modal_opened");
+profileEditButton.addEventListener("click", () => {
+  openPopup(profileEditModal);
   inputName.value = profileName.textContent;
   inputDescription.value = profileDescription.textContent;
 });
 
 // close edit profile modal on click of close button
 profileEditCloseButton.addEventListener("click", () => {
-  closePopup();
+  closePopup(profileEditModal);
 });
 
 // save profile information on submit
@@ -61,23 +109,23 @@ profileEditForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
   profileName.textContent = inputName.value;
   profileDescription.textContent = inputDescription.value;
-  closePopup();
+  closePopup(profileEditModal);
 });
 
-// Get template for initial card setup
-const cardTemplate = document.querySelector("#cards__list-item").content;
-const cardsList = document.querySelector(".cards__list");
-const cardElement = cardTemplate
-  .querySelector(".cards__list-item")
-  .cloneNode(true);
+// open add profile modal on click of plus button
+profileAddButton.addEventListener("click", () => {
+  openPopup(profileAddModal);
+});
 
-// Loop through cards to render on DOM
-initialCards.forEach((cardData) => {
-  const cardElement = cardTemplate
-    .querySelector(".cards__list-item")
-    .cloneNode(true);
-  cardElement.querySelector(".cards__image").src = cardData.link;
-  cardElement.querySelector(".cards__image").alt = cardData.name;
-  cardElement.querySelector(".cards__title").textContent = cardData.name;
-  cardsList.append(cardElement);
+// close add profile modal on click of close button
+profileAddCloseButton.addEventListener("click", () => {
+  closePopup(profileAddModal);
+});
+
+// save new image information on submit
+profileAddForm.addEventListener("submit", (evt) => {
+  evt.preventDefault();
+  const newCard = { name: profileAddTitle.value, link: profileAddImage.value };
+  renderCard(newCard, cardsList);
+  closePopup(profileAddModal);
 });

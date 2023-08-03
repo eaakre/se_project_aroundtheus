@@ -15,6 +15,7 @@
 }
 
 .cards__list-item {
+  position: relative;
   display: flex;
   flex-direction: column;
 }
@@ -55,6 +56,25 @@
 
 .cards__favorite:hover {
   opacity: 0.5;
+}
+
+.cards__favorite_active {
+  background: no-repeat transparent url(../images/favorite-active.svg);
+}
+
+.cards__delete-button {
+  background: no-repeat transparent url(../images/trash.svg);
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  width: 18px;
+  height: 19px;
+  border: none;
+  cursor: pointer;
+}
+
+.cards__delete-button:hover {
+  opacity: 0.6;
 }
 
 @media screen and (max-width: 637px) {
