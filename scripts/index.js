@@ -32,9 +32,11 @@ const cardTemplate = document
 // Wrappers
 const cardsList = document.querySelector(".cards__list");
 const profileEditModal = document.querySelector("#profile-edit-modal");
-const profileEditForm = profileEditModal.querySelector(".modal__form");
-const profileAddModal = document.querySelector("#profile-add-modal");
-const profileAddForm = profileAddModal.querySelector(".modal__form");
+// const profileEditForm = profileEditModal.querySelector(".modal__form");
+const profileEditForm = document.forms["edit-form"];
+const addCardModal = document.querySelector("#profile-add-modal");
+// const addCardForm = addCardModal.querySelector(".modal__form");
+const addCardForm = document.forms["add-form"];
 
 // Find open and close buttons for edit profile button
 const profileEditButton = document.querySelector(".profile__edit-button");
@@ -48,9 +50,9 @@ const inputDescription = profileEditModal.querySelector(
 
 // Find open/close/form fields for add profile button
 const profileAddButton = document.querySelector(".profile__add-button");
-const profileAddCloseButton = profileAddModal.querySelector(".modal__close");
-const profileAddTitle = profileAddModal.querySelector(".form__input_title");
-const profileAddImage = profileAddModal.querySelector(".form__input_image");
+const profileAddCloseButton = addCardModal.querySelector(".modal__close");
+const profileAddTitle = addCardModal.querySelector(".form__input_title");
+const profileAddImage = addCardModal.querySelector(".form__input_image");
 
 // Find open/close/cards for picture modal
 const cardModal = document.querySelector("#card-modal");
@@ -87,7 +89,7 @@ function getCardElement(data) {
     openPopup(cardModal);
     cardModalImage.src = data.link;
     cardModalTitle.textContent = data.name;
-    cardModalTitle.alt = data.name;
+    cardModalImage.alt = data.name;
   });
   return cardElement;
 }
@@ -111,14 +113,13 @@ profileEditButton.addEventListener("click", () => {
   inputDescription.value = profileDescription.textContent;
 });
 
-// close edit profile modal on click of close button
-profileEditCloseButton.addEventListener("click", () => {
-  closePopup(profileEditModal);
-});
+// find close buttons
+const closeButtons = document.querySelectorAll(".modal__close");
 
-// close picture modal on click of close button
-cardModalCloseButton.addEventListener("click", () => {
-  closePopup(cardModal);
+// close popup for each close button
+closeButtons.forEach((button) => {
+  const popup = button.closest(".modal");
+  button.addEventListener("click", () => closePopup(popup));
 });
 
 // save profile information on submit
@@ -131,18 +132,14 @@ profileEditForm.addEventListener("submit", (evt) => {
 
 // open add profile modal on click of plus button
 profileAddButton.addEventListener("click", () => {
-  openPopup(profileAddModal);
-});
-
-// close add profile modal on click of close button
-profileAddCloseButton.addEventListener("click", () => {
-  closePopup(profileAddModal);
+  openPopup(addCardModal);
 });
 
 // save new image information on submit
-profileAddForm.addEventListener("submit", (evt) => {
+addCardForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
   const newCard = { name: profileAddTitle.value, link: profileAddImage.value };
   renderCard(newCard, cardsList);
-  closePopup(profileAddModal);
+  evt.target.reset();
+  closePopup(addCardModal);
 });
