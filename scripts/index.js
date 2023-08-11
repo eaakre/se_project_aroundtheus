@@ -87,6 +87,7 @@ function getCardElement(data) {
     openPopup(cardModal);
     cardModalImage.src = data.link;
     cardModalTitle.textContent = data.name;
+    cardModalTitle.alt = data.name;
   });
   return cardElement;
 }
