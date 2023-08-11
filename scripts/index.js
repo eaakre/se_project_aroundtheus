@@ -26,8 +26,9 @@ const initialCards = [
 ];
 
 // Get template for initial card setup
-const cardTemplate = document.querySelector("#cards__list-item").content;
-
+const cardTemplate = document
+  .querySelector("#cards__list-item")
+  .content.querySelector(".cards__list-item");
 // Wrappers
 const cardsList = document.querySelector(".cards__list");
 const profileEditModal = document.querySelector("#profile-edit-modal");
@@ -51,6 +52,12 @@ const profileAddCloseButton = profileAddModal.querySelector(".modal__close");
 const profileAddTitle = profileAddModal.querySelector(".form__input_title");
 const profileAddImage = profileAddModal.querySelector(".form__input_image");
 
+// Find open/close/cards for picture modal
+const cardModal = document.querySelector("#card-modal");
+const cardModalCloseButton = cardModal.querySelector(".modal__close");
+const cardModalImage = cardModal.querySelector(".modal__image");
+const cardModalTitle = cardModal.querySelector(".modal__title");
+
 // Loop through cards to render on DOM
 function renderCard(cardData, wrapper) {
   const cardElement = getCardElement(cardData);
@@ -69,7 +76,6 @@ function getCardElement(data) {
   });
 
   deleteButton.addEventListener("click", () => {
-    console.log(cardElement);
     cardElement.remove();
   });
 
@@ -77,6 +83,11 @@ function getCardElement(data) {
   cardImage.alt = data.name;
   cardTitle.textContent = data.name;
 
+  cardImage.addEventListener("click", () => {
+    openPopup(cardModal);
+    cardModalImage.src = data.link;
+    cardModalTitle.textContent = data.name;
+  });
   return cardElement;
 }
 
@@ -102,6 +113,11 @@ profileEditButton.addEventListener("click", () => {
 // close edit profile modal on click of close button
 profileEditCloseButton.addEventListener("click", () => {
   closePopup(profileEditModal);
+});
+
+// close picture modal on click of close button
+cardModalCloseButton.addEventListener("click", () => {
+  closePopup(cardModal);
 });
 
 // save profile information on submit

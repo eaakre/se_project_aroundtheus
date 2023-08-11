@@ -1,5 +1,5 @@
 .modal {
-  display: none;
+  /* display: none; */
   position: fixed;
   top: 0;
   right: 0;
@@ -9,10 +9,15 @@
   background-color: rgba(0, 0, 0, 0.5);
   padding: 0 19px;
   box-sizing: border-box;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear;
 }
 
 .modal_opened {
   display: flex;
+  visibility: visible;
+  opacity: 1;
 }
 
 .modal__container {
@@ -23,6 +28,11 @@
   border-radius: 10px;
   background-color: #fff;
   box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
+}
+
+.modal__picture-container {
+  margin: auto;
+  position: relative;
 }
 
 .modal__close {
@@ -73,6 +83,19 @@
 
 .modal__button:hover {
   background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal__image {
+  max-height: 75vh;
+  max-width: 75vw;
+}
+
+.modal__title {
+  color: #fff;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 15px;
 }
 
 @media screen and (max-width: 637px) {
