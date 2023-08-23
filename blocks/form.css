@@ -16,11 +16,11 @@
   line-height: 15px;
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0s, opacity 0.5s linear;
+  transition: visibility 0s, opacity 0.2s linear;
 }
 
 .form__input_type_error {
-  border-bottom: 1px solid rgba(255, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 0, 0, 1);
 }
 
 .form__error_visible {
