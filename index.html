@@ -13,6 +13,7 @@
     <link rel="icon" type="image/x-icon" href="myfavicon.ico" />
 
     <script src="scripts/index.js" defer></script>
+    <script src="scripts/validation.js" defer></script>
     <title>Around the US</title>
   </head>
   <body class="body">
@@ -67,20 +68,30 @@
       <div class="modal__container">
         <button class="modal__close"></button>
         <p class="modal__heading">Edit Profile</p>
-        <form class="form modal__form" name="edit-form">
+        <form class="form modal__form" name="edit-form" novalidate>
           <input
             type="text"
             name="title"
+            id="name-input"
             class="form__input form__input_name"
             placeholder="Name"
+            minlength="2"
+            maxlength="40"
+            required
           />
+          <span class="form__input-error name-input-error"></span>
           <input
             type="text"
             name="description"
+            id="description-input"
             class="form__input form__input_description"
             placeholder="Description"
+            minlength="2"
+            maxlength="200"
+            required
           />
-          <button class="modal__button">Save</button>
+          <span class="form__input-error description-input-error"></span>
+          <button type="submit" class="modal__button">Save</button>
         </form>
       </div>
     </div>
@@ -93,16 +104,33 @@
           <input
             type="text"
             name="title"
+            id="title-input"
             class="form__input form__input_title"
             placeholder="Title"
+            minlength="1"
+            maxlength="30"
+            required
           />
+          <span class="form__input-error title-input-error"></span>
+
           <input
-            type="text"
+            type="url"
             name="image"
+            id="url-input"
             class="form__input form__input_image"
             placeholder="Image URL"
+            required
           />
-          <button class="modal__button">Save</button>
+          <span class="form__input-error url-input-error"></span>
+
+          <button
+            type="submit"
+            class="modal__button modal__button_disabled"
+            id="add-card-button"
+            disabled
+          >
+            Save
+          </button>
         </form>
       </div>
     </div>

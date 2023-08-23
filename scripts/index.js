@@ -32,9 +32,11 @@ const cardTemplate = document
 // Wrappers
 const cardsList = document.querySelector(".cards__list");
 const profileEditModal = document.querySelector("#profile-edit-modal");
+
 // const profileEditForm = profileEditModal.querySelector(".modal__form");
 const profileEditForm = document.forms["edit-form"];
 const addCardModal = document.querySelector("#profile-add-modal");
+
 // const addCardForm = addCardModal.querySelector(".modal__form");
 const addCardForm = document.forms["add-form"];
 
@@ -123,6 +125,8 @@ closeButtons.forEach((button) => {
 });
 
 // save profile information on submit
+// Submit Edit Profile
+
 profileEditForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
   profileName.textContent = inputName.value;
@@ -139,7 +143,27 @@ profileAddButton.addEventListener("click", () => {
 addCardForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
   const newCard = { name: profileAddTitle.value, link: profileAddImage.value };
+  const submitButton = document.querySelector("#add-card-button");
   renderCard(newCard, cardsList);
   evt.target.reset();
+  submitButton.disabled = true;
+  submitButton.classList.add("modal__button_disabled");
   closePopup(addCardModal);
+});
+
+// close open modal on Escape key
+document.addEventListener("keydown", function (evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector(".modal_opened");
+    closePopup(openedPopup);
+  }
+});
+
+// close openModal on on overlay click
+document.addEventListener("mousedown", function (evt) {
+  const targetModal = evt.target.classList.contains("modal");
+  if (targetModal) {
+    const openModal = document.querySelector(".modal_opened");
+    closePopup(openModal);
+  }
 });
