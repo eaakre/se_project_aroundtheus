@@ -32,6 +32,7 @@ const cardTemplate = document
 // Wrappers
 const cardsList = document.querySelector(".cards__list");
 const profileEditModal = document.querySelector("#profile-edit-modal");
+const modals = document.querySelectorAll(".modals");
 
 // const profileEditForm = profileEditModal.querySelector(".modal__form");
 const profileEditForm = document.forms["edit-form"];
@@ -98,10 +99,20 @@ function getCardElement(data) {
 
 function openPopup(el) {
   el.classList.add("modal_opened");
+
+  document.addEventListener("keydown", closeByEscape);
 }
 
 function closePopup(el) {
   el.classList.remove("modal_opened");
+  document.removeEventListener("keydown", closeByEscape);
+}
+
+function closeByEscape(evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector(".modal_opened");
+    closePopup(openedPopup);
+  }
 }
 
 initialCards.forEach((cardData) => {
@@ -149,14 +160,6 @@ addCardForm.addEventListener("submit", (evt) => {
   submitButton.disabled = true;
   submitButton.classList.add("modal__button_disabled");
   closePopup(addCardModal);
-});
-
-// close open modal on Escape key
-document.addEventListener("keydown", function (evt) {
-  if (evt.key === "Escape") {
-    const openedPopup = document.querySelector(".modal_opened");
-    closePopup(openedPopup);
-  }
 });
 
 // close openModal on on overlay click
