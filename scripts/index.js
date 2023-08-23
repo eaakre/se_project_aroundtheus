@@ -154,7 +154,7 @@ profileAddButton.addEventListener("click", () => {
 addCardForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
   const newCard = { name: profileAddTitle.value, link: profileAddImage.value };
-  const submitButton = document.querySelector("#add-card-button");
+  const submitButton = evt.submitter;
   renderCard(newCard, cardsList);
   evt.target.reset();
   submitButton.disabled = true;
@@ -166,7 +166,6 @@ addCardForm.addEventListener("submit", (evt) => {
 document.addEventListener("mousedown", function (evt) {
   const targetModal = evt.target.classList.contains("modal");
   if (targetModal) {
-    const openModal = document.querySelector(".modal_opened");
-    closePopup(openModal);
+    closePopup(evt.target);
   }
 });
