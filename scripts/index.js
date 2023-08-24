@@ -32,7 +32,7 @@ const cardTemplate = document
 // Wrappers
 const cardsList = document.querySelector(".cards__list");
 const profileEditModal = document.querySelector("#profile-edit-modal");
-const modals = document.querySelectorAll(".modals");
+const modals = document.querySelectorAll(".modal");
 
 // const profileEditForm = profileEditModal.querySelector(".modal__form");
 const profileEditForm = document.forms["edit-form"];
@@ -99,7 +99,6 @@ function getCardElement(data) {
 
 function openPopup(el) {
   el.classList.add("modal_opened");
-
   document.addEventListener("keydown", closeByEscape);
 }
 
@@ -115,6 +114,19 @@ function closeByEscape(evt) {
   }
 }
 
+// Add event listeners to close on close buttons or overlay
+modals.forEach((modal) => {
+  modal.addEventListener("mousedown", (evt) => {
+    if (evt.target.classList.contains("modal_opened")) {
+      closePopup(modal);
+    }
+    if (evt.target.classList.contains("modal__close")) {
+      closePopup(modal);
+    }
+  });
+});
+
+// render initial cards on load
 initialCards.forEach((cardData) => {
   renderCard(cardData, cardsList);
 });
@@ -126,18 +138,7 @@ profileEditButton.addEventListener("click", () => {
   inputDescription.value = profileDescription.textContent;
 });
 
-// find close buttons
-const closeButtons = document.querySelectorAll(".modal__close");
-
-// close popup for each close button
-closeButtons.forEach((button) => {
-  const popup = button.closest(".modal");
-  button.addEventListener("click", () => closePopup(popup));
-});
-
-// save profile information on submit
-// Submit Edit Profile
-
+// save Edit Profile on submit
 profileEditForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
   profileName.textContent = inputName.value;
@@ -160,12 +161,4 @@ addCardForm.addEventListener("submit", (evt) => {
   submitButton.disabled = true;
   submitButton.classList.add("modal__button_disabled");
   closePopup(addCardModal);
-});
-
-// close openModal on on overlay click
-document.addEventListener("mousedown", function (evt) {
-  const targetModal = evt.target.classList.contains("modal");
-  if (targetModal) {
-    closePopup(evt.target);
-  }
 });
