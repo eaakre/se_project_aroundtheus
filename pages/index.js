@@ -1,3 +1,6 @@
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
+
 const initialCards = [
   {
     name: "Disney World",
@@ -25,25 +28,19 @@ const initialCards = [
   },
 ];
 
-// Get template for initial card setup
-const cardTemplate = document
-  .querySelector("#cards__list-item")
-  .content.querySelector(".cards__list-item");
 // Wrappers
 const cardsList = document.querySelector(".cards__list");
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const modals = document.querySelectorAll(".modal");
-
-// const profileEditForm = profileEditModal.querySelector(".modal__form");
-const profileEditForm = document.forms["edit-form"];
 const addCardModal = document.querySelector("#profile-add-modal");
+const cardModal = document.querySelector("#card-modal");
 
-// const addCardForm = addCardModal.querySelector(".modal__form");
+// Forms
+const profileEditForm = document.forms["edit-form"];
 const addCardForm = document.forms["add-form"];
 
 // Find open and close buttons for edit profile button
 const profileEditButton = document.querySelector(".profile__edit-button");
-const profileEditCloseButton = document.querySelector(".modal__close");
 const profileName = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 const inputName = profileEditModal.querySelector(".form__input_name");
@@ -53,48 +50,19 @@ const inputDescription = profileEditModal.querySelector(
 
 // Find open/close/form fields for add profile button
 const profileAddButton = document.querySelector(".profile__add-button");
-const profileAddCloseButton = addCardModal.querySelector(".modal__close");
 const profileAddTitle = addCardModal.querySelector(".form__input_title");
 const profileAddImage = addCardModal.querySelector(".form__input_image");
 
 // Find open/close/cards for picture modal
-const cardModal = document.querySelector("#card-modal");
-const cardModalCloseButton = cardModal.querySelector(".modal__close");
 const cardModalImage = cardModal.querySelector(".modal__image");
 const cardModalTitle = cardModal.querySelector(".modal__title");
 
-// Loop through cards to render on DOM
-function renderCard(cardData, wrapper) {
-  const cardElement = getCardElement(cardData);
-  wrapper.prepend(cardElement);
-}
-
-function getCardElement(data) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImage = cardElement.querySelector(".cards__image");
-  const cardTitle = cardElement.querySelector(".cards__title");
-  const likeButton = cardElement.querySelector(".cards__favorite");
-  const deleteButton = cardElement.querySelector(".cards__delete-button");
-
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("cards__favorite_active");
-  });
-
-  deleteButton.addEventListener("click", () => {
-    cardElement.remove();
-  });
-
-  cardImage.src = data.link;
-  cardImage.alt = data.name;
-  cardTitle.textContent = data.name;
-
-  cardImage.addEventListener("click", () => {
-    openPopup(cardModal);
-    cardModalImage.src = data.link;
-    cardModalTitle.textContent = data.name;
-    cardModalImage.alt = data.name;
-  });
-  return cardElement;
+// Functions
+export function handleImageClick(el) {
+  openPopup(cardModal);
+  cardModalImage.src = el._link;
+  cardModalTitle.textContent = el._name;
+  cardModalImage.alt = el._name;
 }
 
 function openPopup(el) {
@@ -114,6 +82,32 @@ function closeByEscape(evt) {
   }
 }
 
+function renderCard(data, wrapper) {
+  const card = new Card(data, "#cards__list-item", handleImageClick);
+  wrapper.prepend(card.getView());
+}
+
+//Render initial cards on page load
+initialCards.forEach((data) => {
+  renderCard(data, cardsList, handleImageClick);
+});
+
+// enabling validation by calling enableValidation()
+// pass all the settings on call
+const config = {
+  formSelector: ".modal__form",
+  inputSelector: ".form__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "form__input_type_error",
+  errorClass: "form__error_visible",
+};
+
+const editFormValidator = new FormValidator(config, profileEditForm);
+const addFormValidator = new FormValidator(config, addCardForm);
+addFormValidator.enableValidation();
+editFormValidator.enableValidation();
+
 // Add event listeners to close on close buttons or overlay
 modals.forEach((modal) => {
   modal.addEventListener("mousedown", (evt) => {
@@ -124,11 +118,6 @@ modals.forEach((modal) => {
       closePopup(modal);
     }
   });
-});
-
-// render initial cards on load
-initialCards.forEach((cardData) => {
-  renderCard(cardData, cardsList);
 });
 
 // open edit profile modal on click of edit button
