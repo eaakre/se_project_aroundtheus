@@ -1,32 +1,6 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
-
-const initialCards = [
-  {
-    name: "Disney World",
-    link: "https://images.unsplash.com/photo-1597466599360-3b9775841aec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80",
-  },
-  {
-    name: "Gooseberry Falls",
-    link: "https://images.unsplash.com/photo-1618502105634-ddb28c748ddb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
-  },
-  {
-    name: "Willis Tower",
-    link: "https://images.unsplash.com/photo-1556472908-0f77e815d81b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80",
-  },
-  {
-    name: "Gateway Arch",
-    link: "https://images.unsplash.com/photo-1593569248805-182542f82c14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=715&q=80",
-  },
-  {
-    name: "Estes Park",
-    link: "https://images.unsplash.com/photo-1520050735087-1ed65d9b0273?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80",
-  },
-  {
-    name: "Glacier National Park",
-    link: "https://images.unsplash.com/photo-1471893370050-2c1a36cf555c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1178&q=80",
-  },
-];
+import { initialCards, config } from "../components/constants.js";
 
 // Wrappers
 const cardsList = document.querySelector(".cards__list");
@@ -58,11 +32,11 @@ const cardModalImage = cardModal.querySelector(".modal__image");
 const cardModalTitle = cardModal.querySelector(".modal__title");
 
 // Functions
-export function handleImageClick(el) {
+export function handleImageClick(name, link) {
   openPopup(cardModal);
-  cardModalImage.src = el._link;
-  cardModalTitle.textContent = el._name;
-  cardModalImage.alt = el._name;
+  cardModalImage.src = link;
+  cardModalTitle.textContent = name;
+  cardModalImage.alt = name;
 }
 
 function openPopup(el) {
@@ -94,15 +68,6 @@ initialCards.forEach((data) => {
 
 // enabling validation by calling enableValidation()
 // pass all the settings on call
-const config = {
-  formSelector: ".modal__form",
-  inputSelector: ".form__input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: "form__input_type_error",
-  errorClass: "form__error_visible",
-};
-
 const editFormValidator = new FormValidator(config, profileEditForm);
 const addFormValidator = new FormValidator(config, addCardForm);
 addFormValidator.enableValidation();
@@ -111,10 +76,10 @@ editFormValidator.enableValidation();
 // Add event listeners to close on close buttons or overlay
 modals.forEach((modal) => {
   modal.addEventListener("mousedown", (evt) => {
-    if (evt.target.classList.contains("modal_opened")) {
-      closePopup(modal);
-    }
-    if (evt.target.classList.contains("modal__close")) {
+    if (
+      evt.target.classList.contains("modal_opened") ||
+      evt.target.classList.contains("modal__close")
+    ) {
       closePopup(modal);
     }
   });
@@ -147,7 +112,6 @@ addCardForm.addEventListener("submit", (evt) => {
   const submitButton = evt.submitter;
   renderCard(newCard, cardsList);
   evt.target.reset();
-  submitButton.disabled = true;
-  submitButton.classList.add("modal__button_disabled");
+  addFormValidator.enableValidation();
   closePopup(addCardModal);
 });
