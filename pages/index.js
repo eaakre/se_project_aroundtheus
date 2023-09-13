@@ -1,6 +1,6 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
-import { initialCards, config } from "../components/constants.js";
+import { initialCards, config } from "../src/utils/constants.js";
 
 // Wrappers
 const cardsList = document.querySelector(".cards__list");
@@ -112,6 +112,6 @@ addCardForm.addEventListener("submit", (evt) => {
   const submitButton = evt.submitter;
   renderCard(newCard, cardsList);
   evt.target.reset();
-  addFormValidator.enableValidation();
+  addFormValidator.disableButton();
   closePopup(addCardModal);
 });
