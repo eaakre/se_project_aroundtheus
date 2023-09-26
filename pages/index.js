@@ -1,4 +1,5 @@
 import Card from "../components/Card.js";
+import Section from "../components/Section.js";
 import FormValidator from "../components/FormValidator.js";
 import { initialCards, config } from "../src/utils/constants.js";
 
@@ -56,15 +57,22 @@ function closeByEscape(evt) {
   }
 }
 
-function renderCard(data, wrapper) {
-  const card = new Card(data, "#cards__list-item", handleImageClick);
-  wrapper.prepend(card.getView());
-}
+// function renderCard(data, wrapper) {
+//   const card = new Card(data, "#cards__list-item", handleImageClick);
+//   wrapper.prepend(card.getView());
+// }
 
-//Render initial cards on page load
-initialCards.forEach((data) => {
-  renderCard(data, cardsList, handleImageClick);
-});
+// Render initial cards on page load
+// initialCards.forEach((data) => {
+//   renderCard(data, cardsList, handleImageClick);
+// });
+
+const cardList = new Section(
+  { data: initialCards },
+  ".cards__list",
+  handleImageClick
+);
+cardList.renderItems();
 
 // enabling validation by calling enableValidation()
 // pass all the settings on call
