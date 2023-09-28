@@ -1,9 +1,10 @@
 import Card from "./Card.js";
 
 export default class Section {
-  constructor({ data }, containerSelector, handleImageClick) {
+  constructor({ data, renderer }, classSelector, handleImageClick) {
     this._renderedItems = data;
-    this._container = document.querySelector(containerSelector);
+    this._renderer = renderer;
+    this._container = document.querySelector(classSelector);
     this._handleImageClick = handleImageClick;
   }
 
@@ -18,6 +19,7 @@ export default class Section {
   renderItems() {
     this.clear();
     this._renderedItems.forEach((item) => {
+      console.log(item);
       const card = new Card(item, "#cards__list-item", this._handleImageClick);
       const cardElement = card.getView();
 
