@@ -36,19 +36,6 @@ const cardModalImage = cardModal.querySelector(".modal__image");
 const cardModalTitle = cardModal.querySelector(".modal__title");
 
 // Functions
-// export function handleImageClick(name, link) {
-//   openPopup(cardModal);
-//   cardModalImage.src = link;
-//   cardModalTitle.textContent = name;
-//   cardModalImage.alt = name;
-// }
-
-export function handleImageClick(name, link) {
-  openPopup(cardModal);
-  cardModalImage.src = link;
-  cardModalTitle.textContent = name;
-  cardModalImage.alt = name;
-}
 
 // function openPopup(el) {
 //   el.classList.add("modal_opened");
@@ -114,10 +101,10 @@ const editProfilePopup = new PopupWithForm("#profile-edit-modal", (e) => {
   profileDescription.textContent = inputDescription.value;
   editProfilePopup.close();
 });
+editProfilePopup.setEventListeners();
 
 profileEditButton.addEventListener("click", () => {
   editProfilePopup.open();
-  editProfilePopup.setEventListeners();
   inputName.value = profileName.textContent;
   inputDescription.value = profileDescription.textContent;
 });
@@ -134,6 +121,13 @@ profileEditButton.addEventListener("click", () => {
 // profileAddButton.addEventListener("click", () => {
 //   openPopup(addCardModal);
 // });
+
+const cardPopup = new PopupWithImage("#card-modal");
+cardPopup.setEventListeners();
+
+export function handleImageClick(name, link) {
+  cardPopup.open(name, link);
+}
 
 function handleNewCardSubmit(data) {
   const { title, image } = data;
