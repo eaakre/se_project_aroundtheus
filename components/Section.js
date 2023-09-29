@@ -19,7 +19,6 @@ export default class Section {
   renderItems() {
     this.clear();
     this._renderedItems.forEach((item) => {
-      console.log(item);
       const card = new Card(item, "#cards__list-item", this._handleImageClick);
       const cardElement = card.getView();
 

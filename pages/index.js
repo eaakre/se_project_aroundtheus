@@ -136,7 +136,6 @@ profileEditButton.addEventListener("click", () => {
 // });
 
 function handleNewCardSubmit(data) {
-  debugger;
   const { title, image } = data;
   const newData = { name: title, link: image };
   // initialCards.push(newData);
@@ -155,9 +154,10 @@ const newCardPopup = new PopupWithForm(
   handleNewCardSubmit
 );
 
+newCardPopup.setEventListeners();
+
 profileAddButton.addEventListener("click", () => {
   newCardPopup.open();
-  newCardPopup.setEventListeners();
 });
 
 // save new image information on submit
