@@ -5,11 +5,12 @@ export default class UserInfo {
   }
 
   getUserInfo() {
+    console.log(this._userName);
     return { name: this._userName, job: this._userJob };
   }
 
-  setUserInfo({ name, job }) {
-    this._userName = name;
-    this._userJob = job;
+  setUserInfo(data) {
+    this._userName = data.title;
+    this._userJob = data.description;
   }
 }
