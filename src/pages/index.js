@@ -26,7 +26,6 @@ function handleNewCardSubmit(data) {
   const { title, image } = data;
   const newCard = createCard({ name: title, link: image });
   cardList.addItem(newCard);
-  addFormValidator.disableButton();
 }
 
 const createCard = (cardObject) => {
@@ -91,5 +90,6 @@ profileEditButton.addEventListener("click", () => {
 
 // On click event for addCard button
 profileAddButton.addEventListener("click", () => {
+  addFormValidator.disableButton();
   newCardPopup.open();
 });

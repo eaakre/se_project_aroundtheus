@@ -1,11 +1,8 @@
-import Card from "./Card.js";
-
 export default class Section {
   constructor({ data, renderer }, selector, handleImageClick) {
     this._items = data;
     this._renderer = renderer;
     this._container = document.querySelector(selector);
-    this._handleImageClick = handleImageClick;
   }
 
   addItem(element) {
