@@ -9,10 +9,9 @@
       content="Profile page for Jacques Cousteau's travels around the USA"
     />
     <meta name="keywords" content="Jacques Cousteau traveller gallery" />
-    <link rel="stylesheet" href="pages/index.css" />
     <link rel="icon" type="image/x-icon" href="myfavicon.ico" />
 
-    <script src="pages/index.js" type="module" defer></script>
+    <!-- <script src="pages/index.js" type="module" defer></script> -->
     <!-- <script src="components/FormValidator.js" defer></script> -->
     <title>Around the US</title>
   </head>
@@ -20,7 +19,7 @@
     <div class="page">
       <header class="header page__header">
         <img
-          src="images/logo.svg"
+          src="<%=require('./images/logo.svg')%>"
           alt="Around the US logo"
           class="header__logo"
         />
@@ -29,7 +28,7 @@
         <section class="profile content__profile">
           <div class="profile__avatar-container">
             <img
-              src="images/jacques-cousteau.jpg"
+              src="<%=require('./images/jacques-cousteau.jpg')%>"
               alt="jacques-cousteau avatar"
               class="profile__avatar"
             />

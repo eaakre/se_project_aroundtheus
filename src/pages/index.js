@@ -13,7 +13,8 @@ import {
   inputName,
   inputDescription,
   profileAddButton,
-} from "../src/utils/constants.js";
+} from "../utils/constants.js";
+import "./index.css";
 
 // Functions
 function handleEditProfileSubmit(data) {
