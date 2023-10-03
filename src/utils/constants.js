@@ -33,3 +33,22 @@ export const config = {
   inputErrorClass: "form__input_type_error",
   errorClass: "form__error_visible",
 };
+
+// Wrappers
+export const profileEditModal = document.querySelector("#profile-edit-modal");
+
+// Forms
+export const profileEditForm = document.forms["edit-form"];
+export const addCardForm = document.forms["add-form"];
+
+// Find open and close buttons for edit profile button
+export const profileEditButton = document.querySelector(
+  ".profile__edit-button"
+);
+export const inputName = profileEditModal.querySelector(".form__input_name");
+export const inputDescription = profileEditModal.querySelector(
+  ".form__input_description"
+);
+
+// Find open/close/form fields for add profile button
+export const profileAddButton = document.querySelector(".profile__add-button");
