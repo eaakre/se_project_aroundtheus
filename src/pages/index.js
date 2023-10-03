@@ -24,13 +24,19 @@ function handleEditProfileSubmit(data) {
 
 function handleNewCardSubmit(data) {
   const { title, image } = data;
-  const newCard = new Card(
-    { name: title, link: image },
-    "#cards__list-item",
-    handleImageClick
-  );
-  cardList.setItem(newCard.getView());
+  const newCard = createCard({ name: title, link: image });
+  cardList.addItem(newCard);
   addFormValidator.disableButton();
+}
+
+const createCard = (cardObject) => {
+  const card = new Card(cardObject, "#cards__list-item", handleImageClick);
+  return card.getView();
+};
+
+function renderCard(data) {
+  const cardElement = createCard(data);
+  cardList.addItem(cardElement);
 }
 
 export function handleImageClick(name, link) {
@@ -39,7 +45,7 @@ export function handleImageClick(name, link) {
 
 // Render Section on page load
 const cardList = new Section(
-  { data: initialCards },
+  { data: initialCards, renderer: renderCard },
   ".cards__list",
   handleImageClick
 );
