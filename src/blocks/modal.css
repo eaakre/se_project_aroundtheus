@@ -98,6 +98,10 @@
   pointer-events: none;
 }
 
+.modal__button_confirm {
+  margin-top: 0;
+}
+
 .modal__image {
   max-height: 75vh;
   max-width: 75vw;

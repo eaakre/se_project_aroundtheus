@@ -1,5 +1,5 @@
 export default class Section {
-  constructor({ data, renderer }, selector, handleImageClick) {
+  constructor({ data, renderer }, selector) {
     this._items = data;
     this._renderer = renderer;
     this._container = document.querySelector(selector);

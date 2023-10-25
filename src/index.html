@@ -27,24 +27,27 @@
       <main class="content">
         <section class="profile content__profile">
           <div class="profile__avatar-container">
-            <img
-              src="<%=require('./images/jacques-cousteau.jpg')%>"
-              alt="jacques-cousteau avatar"
-              class="profile__avatar"
-            />
+            <img src="" alt="jacques-cousteau avatar" class="profile__avatar" />
+            <div class="profile__avatar-overlay">
+              <img
+                src="<%=require('./images/edit-avatar.svg')%>"
+                alt="Edit profile picture"
+                class="profile__avatar-edit"
+              />
+            </div>
           </div>
 
           <div class="profile__info-container">
             <div class="profile__info">
               <div class="profile__heading">
-                <h1 class="profile__title">Jacques Cousteau</h1>
+                <h1 class="profile__title"></h1>
                 <button
                   class="profile__edit-button"
                   type="button"
                   aria-label="edit name"
                 ></button>
               </div>
-              <p class="profile__description">Explorer.</p>
+              <p class="profile__description"></p>
             </div>
             <button
               class="profile__add-button"
@@ -139,6 +142,37 @@
         <button class="modal__close"></button>
         <img class="modal__image" src="#" alt="#" />
         <p class="modal__title"></p>
+      </div>
+    </div>
+
+    <div class="modal" id="delete-card-modal">
+      <div class="modal__container">
+        <button class="modal__close"></button>
+        <p class="modal__heading">Are you sure?</p>
+        <form class="form modal__form" name="delete-card-form" novalidate>
+          <button type="submit" class="modal__button modal__button_confirm">
+            Yes
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal" id="update-avatar-modal">
+      <div class="modal__container">
+        <button class="modal__close"></button>
+        <p class="modal__heading">Change profile picture</p>
+        <form class="form modal__form" name="update-avatar-form" novalidate>
+          <input
+            type="url"
+            name="image"
+            id="url-input"
+            class="form__input form__input_image"
+            placeholder="Image URL"
+            required
+          />
+          <span class="form__input-error url-input-error"></span>
+          <button type="submit" class="modal__button">Yes</button>
+        </form>
       </div>
     </div>
 

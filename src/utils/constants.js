@@ -52,3 +52,12 @@ export const inputDescription = profileEditModal.querySelector(
 
 // Find open/close/form fields for add profile button
 export const profileAddButton = document.querySelector(".profile__add-button");
+
+export const deleteCardButtons = document.querySelectorAll(
+  ".cards__delete-button"
+);
+
+export const profileAvatar = document.querySelector(".profile__avatar");
+export const profileAvatarEdit = document.querySelector(
+  ".profile__avatar-edit"
+);
