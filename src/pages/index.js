@@ -16,6 +16,7 @@ import {
   profileAddButton,
   profileAvatar,
   profileAvatarEdit,
+  avatarForm,
 } from "../utils/constants.js";
 import "./index.css";
 
@@ -23,24 +24,6 @@ let cardList;
 let newCard;
 
 // Functions
-function handleEditProfileSubmit(data) {
-  api
-    .updateProfile({
-      name: data.title,
-      description: data.description,
-    })
-    .then(
-      api.getUser().then((info) => {
-        userInfo.setUserInfo({
-          name: info.name,
-          description: info.about,
-          avatar: info.avatar,
-        });
-      })
-    );
-  editProfilePopup.close();
-}
-
 function renderCard(data) {
   const cardElement = createCard(data);
   cardList.addItem(cardElement);
@@ -48,6 +31,29 @@ function renderCard(data) {
 
 export function handleImageClick(name, link) {
   cardPopup.open(name, link);
+}
+
+// Like Card Functionality
+function handleLikeClick(card) {
+  if (!card._isLiked) {
+    api
+      .likeCard(card._id)
+      .then(() => {
+        card.handleLikeIcon();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  } else {
+    api
+      .removeLikeCard(card._id)
+      .then(() => {
+        card.handleLikeIcon();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
 }
 
 const createCard = (cardObject) => {
@@ -64,7 +70,7 @@ const createCard = (cardObject) => {
 // enable userInfo
 const userInfo = new UserInfo({
   userName: ".profile__title",
-  userJob: ".profile__description",
+  userAbout: ".profile__description",
   userAvatar: ".profile__avatar",
 });
 
@@ -77,20 +83,12 @@ const api = new Api({
   },
 });
 
-// Render user info on page load
-api.getUser().then((info) => {
-  userInfo.setUserInfo({
-    name: info.name,
-    description: info.about,
-  });
-  profileAvatar.src = info.avatar;
-  profileAvatar.alt = info.name + " avatar";
-});
-
-// Render cards on page load
-api.getInitialCards().then((initialCards) => {
+// Render user info and cards on page load
+Promise.all([api.getUser(), api.getInitialCards()]).then(([data, cards]) => {
+  userInfo.setUserInfo({ name: data.name, about: data.about });
+  userInfo.setUserAvatar(data.avatar, data.name);
   cardList = new Section(
-    { data: initialCards, renderer: renderCard },
+    { data: cards, renderer: renderCard },
     ".cards__list",
     handleImageClick,
     handleDeleteClick,
@@ -101,16 +99,27 @@ api.getInitialCards().then((initialCards) => {
 
 // enabling validation by calling enableValidation()
 const editFormValidator = new FormValidator(config, profileEditForm);
+editFormValidator.enableValidation();
+
 const addFormValidator = new FormValidator(config, addCardForm);
 addFormValidator.enableValidation();
-editFormValidator.enableValidation();
+
+const avatarFormValidator = new FormValidator(config, avatarForm);
+avatarFormValidator.enableValidation();
 
 // Editing Profile Interaction
 // Edit Profile Information
-const editProfilePopup = new PopupWithForm(
-  "#profile-edit-modal",
-  handleEditProfileSubmit
-);
+const editProfilePopup = new PopupWithForm("#profile-edit-modal", (data) => {
+  editProfilePopup.setSubmitText(true);
+  console.log(data);
+  api
+    .updateProfile(data)
+    .then((data) => {
+      userInfo.setUserInfo(data);
+      editProfilePopup.close();
+    })
+    .finally(() => editProfilePopup.setSubmitText(false));
+});
 editProfilePopup.setEventListeners();
 
 // On click event for editProfile button
@@ -118,8 +127,8 @@ profileEditButton.addEventListener("click", () => {
   editProfilePopup.open();
   const userData = userInfo.getUserInfo();
   inputName.value = userData.name;
-  inputDescription.value = userData.job;
-  let newInfo = { name: inputName.value, description: inputDescription.value };
+  inputDescription.value = userData.about;
+  let newInfo = { name: inputName.value, about: inputDescription.value };
   userInfo.setUserInfo(newInfo);
 });
 
@@ -190,27 +199,4 @@ function handleDeleteClick(card) {
       .catch((err) => console.error(err))
       .finally(() => deleteCardPopup.setSubmitText(false));
   });
-}
-
-// Like Card Functionality
-function handleLikeClick(card) {
-  if (!card._isLiked) {
-    api
-      .likeCard(card._id)
-      .then(() => {
-        card.handleLikeIcon();
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  } else {
-    api
-      .removeLikeCard(card._id)
-      .then(() => {
-        card.handleLikeIcon();
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }
 }

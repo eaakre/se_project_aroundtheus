@@ -37,7 +37,7 @@ export default class Api {
       method: "PATCH",
       body: JSON.stringify({
         name: data.name,
-        about: data.description,
+        about: data.about,
       }),
       headers: {
         authorization: this._authorization,

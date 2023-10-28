@@ -61,3 +61,4 @@ export const profileAvatar = document.querySelector(".profile__avatar");
 export const profileAvatarEdit = document.querySelector(
   ".profile__avatar-edit"
 );
+export const avatarForm = document.forms["update-avatar-form"];
