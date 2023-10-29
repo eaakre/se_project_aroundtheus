@@ -141,7 +141,12 @@ const newCardPopup = new PopupWithForm(
     api
       .addCard(title, image)
       .then((card) => {
-        newCard = createCard({ name: card.name, link: card.link });
+        newCard = createCard({
+          name: card.name,
+          link: card.link,
+          _id: card._id,
+          isLiked: false,
+        });
         cardList.addItem(newCard);
       })
       .catch((err) => console.log(err))
