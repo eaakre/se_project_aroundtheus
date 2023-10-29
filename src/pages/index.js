@@ -2,7 +2,7 @@ import Card from "../components/Card.js";
 import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
-import PopupWithConfirm from "../components/popupWithConfirm.js";
+import PopupWithConfirm from "../components/PopupWithConfirm.js";
 import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
 import Api from "../components/Api.js";
@@ -14,7 +14,6 @@ import {
   inputName,
   inputDescription,
   profileAddButton,
-  profileAvatar,
   profileAvatarEdit,
   avatarForm,
 } from "../utils/constants.js";
@@ -35,11 +34,11 @@ export function handleImageClick(name, link) {
 
 // Like Card Functionality
 function handleLikeClick(card) {
-  if (!card._isLiked) {
+  if (!card.isLiked()) {
     api
       .likeCard(card._id)
-      .then(() => {
-        card.handleLikeIcon();
+      .then((res) => {
+        card.setIsLiked(res.isLiked);
       })
       .catch((err) => {
         console.error(err);
@@ -47,8 +46,8 @@ function handleLikeClick(card) {
   } else {
     api
       .removeLikeCard(card._id)
-      .then(() => {
-        card.handleLikeIcon();
+      .then((res) => {
+        card.setIsLiked(res.isLiked);
       })
       .catch((err) => {
         console.error(err);
@@ -84,18 +83,17 @@ const api = new Api({
 });
 
 // Render user info and cards on page load
-Promise.all([api.getUser(), api.getInitialCards()]).then(([data, cards]) => {
-  userInfo.setUserInfo({ name: data.name, about: data.about });
-  userInfo.setUserAvatar(data.avatar, data.name);
-  cardList = new Section(
-    { data: cards, renderer: renderCard },
-    ".cards__list",
-    handleImageClick,
-    handleDeleteClick,
-    handleLikeClick
-  );
-  cardList.renderItems();
-});
+Promise.all([api.getUser(), api.getInitialCards()])
+  .then(([data, cards]) => {
+    userInfo.setUserInfo({ name: data.name, about: data.about });
+    userInfo.setUserAvatar(data.avatar, data.name);
+    cardList = new Section(
+      { data: cards, renderer: renderCard },
+      ".cards__list"
+    );
+    cardList.renderItems();
+  })
+  .catch((err) => console.log(err));
 
 // enabling validation by calling enableValidation()
 const editFormValidator = new FormValidator(config, profileEditForm);
@@ -111,13 +109,13 @@ avatarFormValidator.enableValidation();
 // Edit Profile Information
 const editProfilePopup = new PopupWithForm("#profile-edit-modal", (data) => {
   editProfilePopup.setSubmitText(true);
-  console.log(data);
   api
     .updateProfile(data)
     .then((data) => {
       userInfo.setUserInfo(data);
       editProfilePopup.close();
     })
+    .catch((err) => console.log(err))
     .finally(() => editProfilePopup.setSubmitText(false));
 });
 editProfilePopup.setEventListeners();
@@ -128,8 +126,6 @@ profileEditButton.addEventListener("click", () => {
   const userData = userInfo.getUserInfo();
   inputName.value = userData.name;
   inputDescription.value = userData.about;
-  let newInfo = { name: inputName.value, about: inputDescription.value };
-  userInfo.setUserInfo(newInfo);
 });
 
 // New Card Interaction
@@ -148,6 +144,7 @@ const newCardPopup = new PopupWithForm(
           isLiked: false,
         });
         cardList.addItem(newCard);
+        newCardPopup.close();
       })
       .catch((err) => console.log(err))
       .finally(() => newCardPopup.setSubmitText(false));
@@ -178,7 +175,7 @@ updateAvatarPopup.setEventListeners();
 
 // On click event for update profile picture
 profileAvatarEdit.addEventListener("click", () => {
-  addFormValidator.disableButton();
+  avatarFormValidator.disableButton();
   updateAvatarPopup.open();
 });
 

@@ -40,25 +40,22 @@ export const profileEditModal = document.querySelector("#profile-edit-modal");
 // Forms
 export const profileEditForm = document.forms["edit-form"];
 export const addCardForm = document.forms["add-form"];
+export const avatarForm = document.forms["update-avatar-form"];
 
-// Find open and close buttons for edit profile button
+// Find open buttons for modals
 export const profileEditButton = document.querySelector(
   ".profile__edit-button"
 );
+export const profileAddButton = document.querySelector(".profile__add-button");
+export const deleteCardButtons = document.querySelectorAll(
+  ".cards__delete-button"
+);
+export const profileAvatarEdit = document.querySelector(
+  ".profile__avatar-edit"
+);
+
+// Edit Profile Inputs
 export const inputName = profileEditModal.querySelector(".form__input_name");
 export const inputDescription = profileEditModal.querySelector(
   ".form__input_description"
 );
-
-// Find open/close/form fields for add profile button
-export const profileAddButton = document.querySelector(".profile__add-button");
-
-export const deleteCardButtons = document.querySelectorAll(
-  ".cards__delete-button"
-);
-
-export const profileAvatar = document.querySelector(".profile__avatar");
-export const profileAvatarEdit = document.querySelector(
-  ".profile__avatar-edit"
-);
-export const avatarForm = document.forms["update-avatar-form"];

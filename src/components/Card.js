@@ -40,9 +40,22 @@ export default class Card {
     this._cardElement = null;
   };
 
-  handleLikeIcon = () => {
-    this._likeButton.classList.toggle("cards__favorite_active");
-  };
+  setIsLiked(likedStatus) {
+    this._isLiked = likedStatus;
+    this._renderLikes();
+  }
+
+  isLiked() {
+    return this._isLiked;
+  }
+
+  _renderLikes() {
+    if (this._isLiked) {
+      this._likeButton.classList.add("cards__favorite_active");
+    } else {
+      this._likeButton.classList.remove("cards__favorite_active");
+    }
+  }
 
   getView() {
     this._cardElement = this._getCardElement();

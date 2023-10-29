@@ -15,10 +15,10 @@ export default class UserInfo {
   setUserInfo(data) {
     this._userName.textContent = data.name;
     this._userAbout.textContent = data.about;
+    this._userAvatar.alt = data.name + " avatar";
   }
 
   setUserAvatar(image, name) {
     this._userAvatar.src = image;
-    this._userAvatar.alt = name + " avatar";
   }
 }
