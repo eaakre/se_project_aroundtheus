@@ -73,9 +73,8 @@ export default class Card {
     this._cardImage.alt = this._name;
 
     this._setEventsListeners();
-    if (this._isLiked) {
-      this._likeButton.classList.add("cards__favorite_active");
-    }
+    this._renderLikes();
+
     return this._cardElement;
   }
 }
