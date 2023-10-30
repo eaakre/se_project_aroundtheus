@@ -165,7 +165,7 @@ const updateAvatarPopup = new PopupWithForm("#update-avatar-modal", (image) => {
   api
     .updateProfilePicture(image.image)
     .then((userData) => {
-      userInfo.setUserAvatar(userData.avatar);
+      userInfo.setUserAvatar(userData.avatar, userData.name);
       updateAvatarPopup.close();
     })
     .catch((err) => console.log(err))
