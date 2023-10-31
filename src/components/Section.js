@@ -1,5 +1,5 @@
 export default class Section {
-  constructor({ data, renderer }, selector, handleImageClick) {
+  constructor({ data, renderer }, selector) {
     this._items = data;
     this._renderer = renderer;
     this._container = document.querySelector(selector);
@@ -15,6 +15,6 @@ export default class Section {
 
   renderItems() {
     this.clear();
-    this._items.forEach(this._renderer);
+    this._items.reverse().forEach(this._renderer);
   }
 }

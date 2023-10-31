@@ -1,9 +1,19 @@
 export default class Card {
-  constructor({ name, link }, cardSelector, handleImageClick) {
+  constructor(
+    { name, link, _id, isLiked },
+    cardSelector,
+    handleImageClick,
+    handleDeleteClick,
+    handleLikeClick
+  ) {
     this._name = name;
     this._link = link;
+    this._id = _id;
+    this._isLiked = isLiked;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
+    this._handleDeleteClick = handleDeleteClick;
+    this._handleLikeClick = handleLikeClick;
   }
 
   _getCardElement() {
@@ -14,22 +24,38 @@ export default class Card {
   }
   _setEventsListeners() {
     this._cardImage.addEventListener("click", () => {
-      this._handleImageClick({ title: this._name, url: this._link });
+      this._handleImageClick({ name: this._name, url: this._link });
     });
 
-    this._likeButton.addEventListener("click", this._handleLikeIcon);
-
-    this._deleteButton.addEventListener("click", this._handleDeleteCard);
+    this._likeButton.addEventListener("click", () => {
+      this._handleLikeClick(this);
+    });
+    this._deleteButton.addEventListener("click", () => {
+      this._handleDeleteClick(this);
+    });
   }
 
-  _handleDeleteCard = () => {
+  handleDeleteCard = () => {
     this._cardElement.remove();
     this._cardElement = null;
   };
 
-  _handleLikeIcon = () => {
-    this._likeButton.classList.toggle("cards__favorite_active");
-  };
+  setIsLiked(likedStatus) {
+    this._isLiked = likedStatus;
+    this._renderLikes();
+  }
+
+  isLiked() {
+    return this._isLiked;
+  }
+
+  _renderLikes() {
+    if (this._isLiked) {
+      this._likeButton.classList.add("cards__favorite_active");
+    } else {
+      this._likeButton.classList.remove("cards__favorite_active");
+    }
+  }
 
   getView() {
     this._cardElement = this._getCardElement();
@@ -47,6 +73,7 @@ export default class Card {
     this._cardImage.alt = this._name;
 
     this._setEventsListeners();
+    this._renderLikes();
 
     return this._cardElement;
   }
